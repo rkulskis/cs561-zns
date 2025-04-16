@@ -1,0 +1,16 @@
+[global]
+ioengine=libaio
+direct=1
+bs=4k
+iodepth=32
+numjobs=1
+runtime=60
+time_based
+group_reporting
+filename=/dev/nvme0n1
+zonemode=zbd
+zonesize=67108864
+verify=0
+
+[zns_write]
+rw=write

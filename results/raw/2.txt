@@ -1,0 +1,31 @@
+zns_write: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioeng6
+fio-3.16
+Starting 1 process
+Jobs: 1 (f=1): [W(1)][100.0%][w=59.3MiB/s][w=15.2k IOPS][eta 00m:00s]
+zns_write: (groupid=0, jobs=1): err= 0: pid=990: Wed Apr 16 21:59:55 2025
+  write: IOPS=15.2k, BW=59.3MiB/s (62.1MB/s)(3556MiB/60002msec); 112 zone resets
+    slat (usec): min=3, max=2123, avg=12.05, stdev= 6.63
+    clat (usec): min=85, max=3627, avg=1039.27, stdev=421.06
+     lat (usec): min=480, max=3638, avg=1051.50, stdev=421.55
+    clat percentiles (usec):
+     |  1.00th=[  474],  5.00th=[  478], 10.00th=[  478], 20.00th=[  478],
+     | 30.00th=[  832], 40.00th=[  865], 50.00th=[  979], 60.00th=[ 1221],
+     | 70.00th=[ 1254], 80.00th=[ 1565], 90.00th=[ 1614], 95.00th=[ 1647],
+     | 99.00th=[ 1680], 99.50th=[ 1696], 99.90th=[ 1811], 99.95th=[ 1827],
+     | 99.99th=[ 2212]
+   bw (  KiB/s): min=60368, max=60984, per=100.00%, avg=60690.84, stdev=100.07, samples0
+   iops        : min=15092, max=15246, avg=15172.70, stdev=25.03, samples=120
+  lat (usec)   : 100=0.01%, 250=0.01%, 500=24.85%, 750=0.50%, 1000=24.67%
+  lat (msec)   : 2=49.96%, 4=0.02%
+  cpu          : usr=5.44%, sys=23.10%, ctx=810824, majf=0, minf=14
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=99.8%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,910408,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=16
+
+Run status group 0 (all jobs):
+  WRITE: bw=59.3MiB/s (62.1MB/s), 59.3MiB/s-59.3MiB/s (62.1MB/s-62.1MB/s), io=3556MiB (c
+
+Disk stats (read/write):
+  nvme0n1: ios=51/908862, merge=0/0, ticks=6/948904, in_queue=0, util=99.92%

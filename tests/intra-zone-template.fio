@@ -1,10 +1,10 @@
 [single_zone_write]
-filename=/dev/nvme0n1        # ZNS device under test
-zonemode=zbd                 # Zoned block device mode
-ioengine=psync               # Use synchronous writes
-direct=1                     # Direct I/O (no cache)
-rw=write                     # Sequential write pattern
-bs=128k                      # 128 KiB block size for writes
-zonesize=64M                 # Write one zone worth of data
-size=64M
-iodepth=1 
+filename=/dev/nvme0n1              # Your ZNS device under test
+zonemode=zbd                       # Enforce ZNS constraints
+ioengine=io_uring                  # Modern async I/O engine
+direct=1                           # Bypass OS page cache
+rw=write                           # Sequential write pattern
+bs=128k                            # Large block size (optimal for ZNS)
+size=64M                           # Write exactly one zone
+iodepth=_IODEPTH_                  # Placeholder: replace with 1, 2, 4, 8, ...
+group_reporting=1                  # Cleaner output for multiple jobs

@@ -7,3 +7,7 @@ compile-femu:
 	sudo ./confznsplusplus/femu-scripts/pkgdep.sh
 	cp -f ./scripts/femu-compile.sh ./confznsplusplus/femu-scripts/
 	cd ./confznsplusplus/femu-scripts/ && ./femu-compile.sh # 999 888
+
+compile-femu-scc:
+	cp -f ./scripts/femu-compile-scc.sh ./confznsplusplus/femu-scripts/femu-compile.sh
+	cd ./confznsplusplus/femu-scripts/ && ./femu-compile.sh # 999 888

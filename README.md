@@ -12,13 +12,13 @@
    ```bash
    # only Debian/Ubuntu based distributions supported
    cd cs561-zns/
-   make femu-compile
+   make compile-femu
    ```
    ```bash
    # If on BU's SCC, follow below instructions
    cd cs562-zns/
    module load pixman ninja
-   make femu-compile-scc
+   make compile-femu-scc
    ```
 3. Get the [VM image](https://forms.gle/nEZaEe2fkj5B1bxt9) and unzip into desired directory
 - In `/confznsplusplus/femu-scripts/run-zns.sh` change the below line to the location of your vm image in relation to the `run-zns.sh` file

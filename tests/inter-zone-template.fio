@@ -1,0 +1,14 @@
+[global]
+filename=/dev/nvme0n1
+zonemode=zbd
+ioengine=psync
+direct=1
+rw=write
+bs=64k
+offset_increment=64M     # advance one zone per job
+zonesize=64M
+size=64M                 # must match or exceed zone size
+group_reporting=1
+
+[seqwrite_multi]
+numjobs=_NUMJOBS_

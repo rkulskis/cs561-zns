@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 
 # Second graph script to test disk utilization
 BASE_DIR = "../results/csv"
-CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32, 64]
+CONCURRENCY_LEVELS = [1, 2, 4, 8, 16]
 
 GEOMETRIES = ["FU_ZONE", "MU4_ZONE", "MU8_ZONE", "SU_ZONE"]
-MODES = ["intra"]
+MODES = ["inter", "intra"]
 
 def get_disk_util_from_file(filepath):
     with open(filepath) as f:

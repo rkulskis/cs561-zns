@@ -1,0 +1,9 @@
+[rand_read_zone]
+filename=/dev/nvme0n1
+zonemode=zbd
+ioengine=io_uring
+direct=1
+rw=randread
+bs=4k
+size=64M
+iodepth=_IODEPTH_

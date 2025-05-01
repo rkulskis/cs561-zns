@@ -11,7 +11,7 @@ MODES = ["inter", "intra"]
 def get_iops_from_file(filepath):
     with open(filepath) as f:
         data = json.load(f)
-        return data["jobs"][0]["write"]["iops"]
+        return (data["jobs"][0]["write"]["lat_ns"]["mean"] / 1000)
 
 def collect_data(mode):
     results = {}
@@ -34,13 +34,13 @@ def plot_data(results, mode):
     plt.figure(figsize=(8, 5))
     for geometry, y_values in results.items():
         plt.plot(CONCURRENCY_LEVELS, y_values, marker='o', label=geometry)
-    plt.xlabel("Queue Depth")
-    plt.ylabel("Throughput (IOPs)")
-    plt.title(f"Throughput vs Queue Depth")
+    plt.xlabel("Num Jobs")
+    plt.ylabel("Mean Write Latency (μs)")
+    plt.title(f"Write Latency vs Num Jobs")
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f"throughput_{mode}.png")
+    plt.savefig(f"write-latency_{mode}.png")
     plt.show()
 
 if __name__ == "__main__":

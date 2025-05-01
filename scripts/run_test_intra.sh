@@ -68,7 +68,7 @@ for config_name in "${CONFIGS[@]}"; do
         "echo '[DEBUG] VM FIO file: $FIO_FILE' >> ~/fio_debug.log && cat ~/$FIO_FILE >> ~/fio_debug.log"
         sshpass -p femu ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 8080 femu@127.0.0.1 "echo femu | sudo -S nvme zns reset-zone /dev/nvme0n1 -a"
         sshpass -p femu ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 8080 femu@127.0.0.1 "echo femu | sudo -S bash -c 'fio --output-format=json --output=${FIO_JOB_NAME}.json /home/femu/${FIO_FILE}'"
-        sshpass -p femu scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 8080 femu@127.0.0.1:~/${FIO_JOB_NAME}.json "../results/csv/${config_name}-${PREFIX}/${FIO_JOB_NAME}-${date_time}.json"
+        sshpass -p femu scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 8080 femu@127.0.0.1:~/${FIO_JOB_NAME}.json "../results/csv/${config_name}-${PREFIX}2/${FIO_JOB_NAME}-${date_time}.json"
     done
     popd || exit 1
 

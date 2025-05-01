@@ -6,4 +6,5 @@ direct=1
 rw=read
 bs=128k
 size=64M
+zonesize=64M
 iodepth=_IODEPTH_

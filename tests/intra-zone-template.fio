@@ -7,5 +7,5 @@ rw=write                           # Sequential write pattern
 bs=128k                            # Large block size (optimal for ZNS)
 zonesize=64M
 size=64M                           # Write exactly one zone
-iodepth=64                  # Placeholder: replace with 1, 2, 4, 8, ...
+iodepth=_IODEPTH_                  # Placeholder: replace with 1, 2, 4, 8, ...
 group_reporting=1                  # Cleaner output for multiple jobs

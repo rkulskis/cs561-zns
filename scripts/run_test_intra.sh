@@ -54,7 +54,7 @@ for config_name in "${CONFIGS[@]}"; do
 
     # Run the actual test
     pushd ../tests || exit 1
-    mkdir -p "../results/csv/${config_name}-${PREFIX}"
+    mkdir -p "../results/csv/${config_name}-${PREFIX}2"
     for qd in 1 2 4 8 16 32 64; do
         FIO_JOB_NAME="${PREFIX}_${qd}"                   # Used for result naming
         FIO_FILE="${FIO_JOB_NAME}.fio"                   # The actual fio file

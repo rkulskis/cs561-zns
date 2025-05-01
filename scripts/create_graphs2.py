@@ -2,16 +2,17 @@ import os
 import json
 import matplotlib.pyplot as plt
 
+# Second graph script to test disk utilization
 BASE_DIR = "../results/csv"
 CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32, 64]
 
 GEOMETRIES = ["FU_ZONE", "MU4_ZONE", "MU8_ZONE", "SU_ZONE"]
 MODES = ["intra"]
 
-def get_iops_from_file(filepath):
+def get_disk_util_from_file(filepath):
     with open(filepath) as f:
         data = json.load(f)
-        return data["jobs"][0]["write"]["iops"]
+        return data["disk_util"][0]["util"]
 
 def collect_data(mode):
     results = {}
@@ -24,7 +25,7 @@ def collect_data(mode):
             filename = next((f for f in os.listdir(full_path) if f.startswith(match_prefix)), None)
             if filename:
                 filepath = os.path.join(full_path, filename)
-                y_values.append(get_iops_from_file(filepath))
+                y_values.append(get_disk_util_from_file(filepath))
             else:
                 y_values.append(0)
         results[geometry] = y_values
@@ -35,12 +36,12 @@ def plot_data(results, mode):
     for geometry, y_values in results.items():
         plt.plot(CONCURRENCY_LEVELS, y_values, marker='o', label=geometry)
     plt.xlabel("Queue Depth")
-    plt.ylabel("Throughput (IOPs)")
-    plt.title(f"Throughput vs Queue Depth")
+    plt.ylabel("Disk Utilization")
+    plt.title(f"Utilization vs IO")
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f"throughput_{mode}.png")
+    plt.savefig(f"utilization_{mode}.png")
     plt.show()
 
 if __name__ == "__main__":

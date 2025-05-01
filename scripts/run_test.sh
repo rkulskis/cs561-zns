@@ -55,7 +55,7 @@ for config_name in "${CONFIGS[@]}"; do
     # Run the actual test
     pushd ../tests || exit 1
     mkdir -p "../results/csv/${config_name}-${PREFIX}"
-    for nj in 1 2 4 8 16; do
+    for nj in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16; do
         FIO_JOB_NAME="${PREFIX}_${nj}"                   # Used for result naming
         FIO_FILE="${FIO_JOB_NAME}.fio"                   # The actual fio file
         sed "s/_NUMJOBS_/${nj}/" "$BASE_FIO_TEMPLATE" > "$FIO_FILE"

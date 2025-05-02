@@ -20,27 +20,27 @@
 ## IOPS Graphs
 
 ### FU_ZONE
-![FU_ZONE Inter IOPS](graphs/FU_ZONE_inter_iops.png)
-![FU_ZONE Intra IOPS](graphs/FU_ZONE_intra_iops.png)
+![FU_ZONE Inter IOPS](results/graphs/FU_ZONE_inter_iops.png)
+![FU_ZONE Intra IOPS](results/graphs/FU_ZONE_intra_iops.png)
 
 ### MU4_ZONE
-![MU4_ZONE Inter IOPS](graphs/MU4_ZONE_inter_iops.png)
-![MU4_ZONE Intra IOPS](graphs/MU4_ZONE_intra_iops.png)
+![MU4_ZONE Inter IOPS](results/graphs/MU4_ZONE_inter_iops.png)
+![MU4_ZONE Intra IOPS](results/graphs/MU4_ZONE_intra_iops.png)
 
 ### MU8_ZONE
-![MU8_ZONE Inter IOPS](graphs/MU8_ZONE_inter_iops.png)
-![MU8_ZONE Intra IOPS](graphs/MU8_ZONE_intra_iops.png)
+![MU8_ZONE Inter IOPS](results/graphs/MU8_ZONE_inter_iops.png)
+![MU8_ZONE Intra IOPS](results/graphs/MU8_ZONE_intra_iops.png)
 
 ### SU_ZONE
-![SU_ZONE Inter IOPS](graphs/SU_ZONE_inter_iops.png)
-![SU_ZONE Intra IOPS](graphs/SU_ZONE_intra_iops.png)
+![SU_ZONE Inter IOPS](results/graphs/SU_ZONE_inter_iops.png)
+![SU_ZONE Intra IOPS](results/graphs/SU_ZONE_intra_iops.png)
 
 ## Disk Utilization Graphs
 
 ### Inter
-![Utilization Inter Read](graphs/utilization_inter_read.png)
-![Utilization Inter Write](graphs/utilization_inter_write.png)
+![Utilization Inter Read](results/graphs/utilization_inter_read.png)
+![Utilization Inter Write](results/graphs/utilization_inter_write.png)
 
 ### Intra
-![Utilization Intra Read](graphs/utilization_intra_read.png)
-![Utilization Intra Write](graphs/utilization_intra_write.png)
+![Utilization Intra Read](results/graphs/utilization_intra_read.png)
+![Utilization Intra Write](results/graphs/utilization_intra_write.png)

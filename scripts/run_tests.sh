@@ -54,8 +54,7 @@ for config_name in "${CONFIGS[@]}"; do # tests
     popd 												# from ../confznsplusplus/femu-scripts
 
     pushd ../tests
-    # for j in {1..48}; do
-    for j in {1,2,4,8,16,32,64,100}; do
+    for j in {1..64}; do
 				i=$((j))
 				# if [ "$j" -ge 20 ]; then
 						# i=$(((j - 18) * 10)) # [20,30,...,300]
@@ -100,8 +99,10 @@ for config_name in "${CONFIGS[@]}"; do # tests
                 --group_reporting=1"
 								fi
 
-								scp_from_vm "${REMOTE_DIR}/${FIO_JOB_NAME}.json" \
-														"../results/json/${TEST_NAME}/${config_name}/${FIO_JOB_NAME}-${date_time}.json"
+								out_json="../results/json/${TEST_NAME}/${config_name}/${FIO_JOB_NAME}-${date_time}.json"
+								scp_from_vm "${REMOTE_DIR}/${FIO_JOB_NAME}.json" "$out_json"
+														
+								python3 trim_fio_json.py "$out_json" "$out_json" "$rw"
 						done
 				done
     done

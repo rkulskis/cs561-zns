@@ -11,10 +11,12 @@ MODES = ["inter", "intra"]
 RWS = ["read", "write"]
 
 def extract_util(data):
-    return data["disk_util"][0]["util"]
+    # return data["disk_util"][0]["util"]
+    return data["util"]         # since we compressed the data
 
 def extract_iops(data, rw):
-    return data["jobs"][0][rw]["iops"]
+    # return data["jobs"][0][rw]["iops"]
+    return data["iops"]
 
 def get_concurrency_levels(dir_path):
     levels = set()

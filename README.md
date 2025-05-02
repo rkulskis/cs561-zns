@@ -22,7 +22,7 @@
 For inter-zone concurrency we scale by number of jobs=threads. For intra-zone
 concurrency we scale by iodepth within a zone. We measure roughly a uniform
 set of $(\alpha, k)$ across all zone geometries listed below with
-$(6,64)$ for inter-zone and $(7,2)$ for intra-zone.
+$(6,45)$ for inter-zone and $(7,2)$ for intra-zone.
 
 ### FU_ZONE
 ![FU_ZONE Inter IOPS](results/graphs/FU_ZONE_inter_iops.png)

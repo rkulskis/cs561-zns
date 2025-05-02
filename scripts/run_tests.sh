@@ -54,67 +54,56 @@ for config_name in "${CONFIGS[@]}"; do # tests
     popd 												# from ../confznsplusplus/femu-scripts
 
     pushd ../tests
-    for j in {1..48}; do		 
-				if [ "$j" -ge 20 ]; then
-						i=$(((j - 18) * 10)) # [20,30,...,300]
-				else
-						i=$((j))				# [1,2,...20)
-				fi
+    # for j in {1..48}; do
+    for j in {1,2,4,8,16,32,64,100}; do
+				i=$((j))
+				# if [ "$j" -ge 20 ]; then
+						# i=$(((j - 18) * 10)) # [20,30,...,300]
+				# else
+						# i=$((j))				# [1,2,...20)
+				# fi
         FIO_JOB_NAME="${i}"                   # Used for result naming
-				# 1. SEQ read
-				TEST_NAME=seq_read
-						ssh_vm "nvme zns reset-zone /dev/nvme0n1 -a" # clean state				
-						mkdir -p "../results/json/${TEST_NAME}/${config_name}"
-						ssh_vm "fio --output-format=json \
-				  	--output=${FIO_JOB_NAME}.json \
-  					--name=seq_read_zone \
-  					--filename=/dev/nvme0n1 \
-  					--zonemode=zbd \
-  					--ioengine=io_uring \
-  					--direct=1 \
-  					--rw=read \
-  					--bs=128k \
-  					--size=64M \
-  					--zonesize=64M \
-  					--iodepth=${i}"
-						scp_from_vm "${REMOTE_DIR}/${FIO_JOB_NAME}.json" "../results/json/${TEST_NAME}/${config_name}/${FIO_JOB_NAME}-${date_time}.json"
-				# 2. INTRA zone
-				TEST_NAME=intra								
-						ssh_vm "nvme zns reset-zone /dev/nvme0n1 -a" # clean state				
-						mkdir -p "../results/json/${TEST_NAME}/${config_name}"
-						ssh_vm "fio --output-format=json \
-				  				 --output=${FIO_JOB_NAME}.json \
-					  			 --name=single_zone_write \
-  								 --filename=/dev/nvme0n1 \
-  								 --zonemode=zbd \
-  								 --ioengine=io_uring \
-  								 --direct=1 \
-  								 --rw=write \
-  								 --bs=128k \
-  								 --zonesize=64M \
-  								 --size=64M \
-  								 --iodepth=${i} \
-  								 --group_reporting=1"
-						scp_from_vm "${REMOTE_DIR}/${FIO_JOB_NAME}.json" "../results/json/${TEST_NAME}/${config_name}/${FIO_JOB_NAME}-${date_time}.json"
-				# 3. inter zone
-				TEST_NAME=inter
-						ssh_vm "nvme zns reset-zone /dev/nvme0n1 -a" # clean state	
-						mkdir -p "../results/json/${TEST_NAME}/${config_name}"
-						ssh_vm "fio --output-format=json \
-				  				 --output=${FIO_JOB_NAME}.json \
-  								 --name=seqwrite_multi \
-  								 --filename=/dev/nvme0n1 \
-  								 --zonemode=zbd \
-  								 --ioengine=psync \
-  								 --direct=1 \
-  								 --rw=write \
-  								 --bs=64k \
-  								 --offset_increment=64M \
-  								 --zonesize=64M \
-  								 --size=64M \
-  								 --group_reporting=1 \
-  								 --numjobs=${i}"
-						scp_from_vm "${REMOTE_DIR}/${FIO_JOB_NAME}.json" "../results/json/${TEST_NAME}/${config_name}/${FIO_JOB_NAME}-${date_time}.json"
+				for rw in read write; do
+						for zone in intra inter; do
+								TEST_NAME="${zone}_${rw}"
+								ssh_vm "nvme zns reset-zone /dev/nvme0n1 -a"
+								mkdir -p "../results/json/${TEST_NAME}/${config_name}"
+
+								if [ "$zone" = "intra" ]; then
+										ssh_vm "fio --output-format=json \
+                --output=${FIO_JOB_NAME}.json \
+                --name=${FIO_JOB_NAME} \
+                --filename=/dev/nvme0n1 \
+                --zonemode=zbd \
+                --ioengine=io_uring \
+                --direct=1 \
+                --rw=${rw} \
+                --bs=128k \
+                --zonesize=64M \
+                --size=64M \
+                --iodepth=${i} \
+                --group_reporting=1"
+								else # inter
+										ssh_vm "fio --output-format=json \
+                --output=${FIO_JOB_NAME}.json \
+                --name=${FIO_JOB_NAME} \
+                --filename=/dev/nvme0n1 \
+                --zonemode=zbd \
+                --ioengine=psync \
+                --direct=1 \
+                --rw=${rw} \
+                --bs=64k \
+                --offset_increment=64M \
+                --zonesize=64M \
+                --size=64M \
+                --numjobs=${i} \
+                --group_reporting=1"
+								fi
+
+								scp_from_vm "${REMOTE_DIR}/${FIO_JOB_NAME}.json" \
+														"../results/json/${TEST_NAME}/${config_name}/${FIO_JOB_NAME}-${date_time}.json"
+						done
+				done
     done
     ps aux | grep '[q]emu' | awk '{print $2}' | xargs sudo kill -9 # kill FEMU
 		sleep 1

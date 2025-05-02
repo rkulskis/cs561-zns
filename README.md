@@ -4,25 +4,43 @@
 
 ## Setup instructions
 1. Clone the repository including its submodules/dependencies
-
     ```bash
     git clone --recurse-submodules https://github.com/rkulskis/cs561-zns.git
     ```
-2. Compile FEMU with custom femu scripts
+2. Get the [VM image](https://forms.gle/nEZaEe2fkj5B1bxt9) and unzip into `~/images`
+3. Compile FEMU using `run_tests.sh`
    ```bash
    # only Debian/Ubuntu based distributions supported
-   cd cs561-zns/
-   make compile-femu
+	 # We are on: Linux n0 6.5.0-44-generic #44-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun  7 15:10:09 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+   cd cs561-zns/scipts
+   ./run_tests.sh
+	 python3 graph.py
    ```
-   ```bash
-   # If on BU's SCC, follow below instructions
-   cd cs562-zns/
-   module load pixman ninja
-   make compile-femu-scc
-   ```
-3. Get the [VM image](https://forms.gle/nEZaEe2fkj5B1bxt9) and unzip into desired directory
-- In `/confznsplusplus/femu-scripts/run-zns.sh` change the below line to the location of your vm image in relation to the `run-zns.sh` file
-  ```bash
-  IMGDIR=$HOME/images --> IMGDIR=[IMAGE_DIR]
-  ```
-   
+
+## IOPS Graphs
+
+### FU_ZONE
+![FU_ZONE Inter IOPS](graphs/FU_ZONE_inter_iops.png)
+![FU_ZONE Intra IOPS](graphs/FU_ZONE_intra_iops.png)
+
+### MU4_ZONE
+![MU4_ZONE Inter IOPS](graphs/MU4_ZONE_inter_iops.png)
+![MU4_ZONE Intra IOPS](graphs/MU4_ZONE_intra_iops.png)
+
+### MU8_ZONE
+![MU8_ZONE Inter IOPS](graphs/MU8_ZONE_inter_iops.png)
+![MU8_ZONE Intra IOPS](graphs/MU8_ZONE_intra_iops.png)
+
+### SU_ZONE
+![SU_ZONE Inter IOPS](graphs/SU_ZONE_inter_iops.png)
+![SU_ZONE Intra IOPS](graphs/SU_ZONE_intra_iops.png)
+
+## Disk Utilization Graphs
+
+### Inter
+![Utilization Inter Read](graphs/utilization_inter_read.png)
+![Utilization Inter Write](graphs/utilization_inter_write.png)
+
+### Intra
+![Utilization Intra Read](graphs/utilization_intra_read.png)
+![Utilization Intra Write](graphs/utilization_intra_write.png)

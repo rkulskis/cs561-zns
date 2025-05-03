@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Configuration
 BASE_DIR = "../results/json"
-GRAPH_DIR = "../results/graphs"
+GRAPH_DIR = "../results/graphs2"
 GEOMETRIES = ["FU_ZONE", "MU4_ZONE", "MU8_ZONE", "SU_ZONE"]
 MODES = ["inter", "intra"]
 RWS = ["read", "write"]

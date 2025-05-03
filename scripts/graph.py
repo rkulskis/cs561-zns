@@ -48,7 +48,6 @@ def plot_geometry_iops(geometry):
     for mode in MODES:
         plt.figure(figsize=(8, 5))
         for rw in RWS:
-            dir_path = os.path.join(BASE_DIR, f"{mode}_{rw}", geometry)
             concurrency_levels, y_values = collect_iops_data(mode, geometry, rw)
             if concurrency_levels:
                 plt.plot(concurrency_levels, y_values, marker='o', label=f"{rw}")

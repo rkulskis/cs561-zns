@@ -53,7 +53,6 @@ for config_name in "${CONFIGS[@]}"; do # tests
 
     popd 												# from ../confznsplusplus/femu-scripts
 
-    pushd ../tests
     for j in {1..64}; do
 				i=$((j))
 				# if [ "$j" -ge 20 ]; then
@@ -67,6 +66,11 @@ for config_name in "${CONFIGS[@]}"; do # tests
 								TEST_NAME="${zone}_${rw}"
 								ssh_vm "nvme zns reset-zone /dev/nvme0n1 -a"
 								mkdir -p "../results/json/${TEST_NAME}/${config_name}"
+                if [ "$rw" = "read" ]; then
+                    BS="4k"
+                else
+                    BS="64k"
+                fi
 
 								if [ "$zone" = "intra" ]; then
 										ssh_vm "fio --output-format=json \
@@ -77,7 +81,7 @@ for config_name in "${CONFIGS[@]}"; do # tests
                 --ioengine=io_uring \
                 --direct=1 \
                 --rw=${rw} \
-                --bs=128k \
+                --bs=${BS} \
                 --zonesize=64M \
                 --size=64M \
                 --iodepth=${i} \
@@ -91,7 +95,7 @@ for config_name in "${CONFIGS[@]}"; do # tests
                 --ioengine=psync \
                 --direct=1 \
                 --rw=${rw} \
-                --bs=64k \
+                --bs=${BS} \
                 --offset_increment=64M \
                 --zonesize=64M \
                 --size=64M \
